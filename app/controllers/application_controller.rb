@@ -6,6 +6,6 @@ class ApplicationController < ActionController::API
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name fractal_id photo_url token_dg])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name fractal_id photo_url status token_dg unit_dg])
   end
 end

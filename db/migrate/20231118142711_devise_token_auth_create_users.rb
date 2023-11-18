@@ -33,9 +33,10 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[7.0]
       # t.string :nickname
       # t.string :image
       t.string :email
-      t.integer :fractal_id
+      t.integer :fractal_id, null: false, index: { unique: true }
       t.string :photo_url
-      t.string :token_dg
+      t.string :token_dg, null: false, index: { unique: true }
+      t.integer :status, default: 0
 
       ## Tokens
       t.json :tokens

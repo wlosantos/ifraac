@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :user do
+    unit
     name { Faker::Name.name }
     email { "#{name.split.join('_')}@#{Faker::Internet.domain_name}" }
     password { '123456' }
