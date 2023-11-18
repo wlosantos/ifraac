@@ -15,6 +15,7 @@ RSpec.describe Unit, type: :model do
   end
 
   describe 'associations' do
+    it { is_expected.to have_many(:talk_channels) }
     it { is_expected.to have_many(:users).with_foreign_key(:unit_dg).with_primary_key(:unit_dg) }
   end
 end

@@ -10,9 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_18_150332) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_18_211153) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "talk_channels", force: :cascade do |t|
+    t.string "name"
+    t.integer "kinds", default: 0, null: false
+    t.boolean "is_blocked", default: false, null: false
+    t.boolean "read_only", default: false, null: false
+    t.boolean "moderated", default: false, null: false
+    t.bigint "created_by_id", null: false
+    t.boolean "closed", default: false, null: false
+    t.datetime "closed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "unit_dg"
+    t.index ["created_by_id"], name: "index_talk_channels_on_created_by_id"
+  end
 
   create_table "units", force: :cascade do |t|
     t.string "name", null: false
@@ -39,5 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_18_150332) do
     t.index ["token_dg"], name: "index_users_on_token_dg", unique: true
   end
 
+  add_foreign_key "talk_channels", "units", column: "unit_dg", primary_key: "unit_dg"
+  add_foreign_key "talk_channels", "users", column: "created_by_id"
   add_foreign_key "users", "units", column: "unit_dg", primary_key: "unit_dg"
 end

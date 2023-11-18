@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user do
+  factory :user, aliases: %i[created_by] do
     unit
     name { Faker::Name.name }
     email { "#{name.split.join('_')}@#{Faker::Internet.domain_name}" }
