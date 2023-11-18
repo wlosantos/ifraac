@@ -7,7 +7,6 @@ require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
-require 'database_cleaner'
 require 'pundit/rspec'
 require 'webmock/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -46,18 +45,6 @@ RSpec.configure do |config|
   config.order = :random
   config.default_formatter = 'doc'
   config.filter_run_when_matching :focus
-
-  # DATABASE_CLEANER
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.around(:each) do |example|
-    DatabaseCleaner.cleaning do
-      example.run
-    end
-  end
 
   # FACTORY_BOT
   config.include FactoryBot::Syntax::Methods

@@ -74,7 +74,6 @@ GEM
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
-    awesome_print (1.9.2)
     base64 (0.2.0)
     bcrypt (3.1.20)
     bootsnap (1.17.0)
@@ -92,12 +91,6 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    database_cleaner (2.0.2)
-      database_cleaner-active_record (>= 2, < 3)
-    database_cleaner-active_record (2.1.0)
-      activerecord (>= 5.a)
-      database_cleaner-core (~> 2.0.0)
-    database_cleaner-core (2.0.1)
     date (3.3.4)
     devise (4.9.3)
       bcrypt (~> 3.0)
@@ -216,10 +209,6 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.1.0)
-    ransack (4.1.1)
-      activerecord (>= 6.1.5)
-      activesupport (>= 6.1.5)
-      i18n
     redis (4.8.1)
     regexp_parser (2.8.2)
     responders (3.1.1)
@@ -298,12 +287,10 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
-  awesome_print
   bootsnap
   brakeman
   bundler-audit
   byebug
-  database_cleaner
   devise_token_auth
   dotenv-rails
   factory_bot_rails
@@ -316,7 +303,6 @@ DEPENDENCIES
   pundit
   rack-cors
   rails (~> 7.0.8)
-  ransack
   redis (~> 4.0)
   rolify
   rspec-rails
