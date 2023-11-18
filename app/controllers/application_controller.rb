@@ -1,11 +1,31 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::API
-  include DeviseTokenAuth::Concerns::SetUserByToken
-  before_action :authenticate_user!
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  include ActionController::HttpAuthentication::Token::ControllerMethods
+  include Pundit::Authorization
 
-  protected
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name fractal_id photo_url status token_dg unit_dg])
+  before_action :authenticate!
+
+  private
+
+  def authenticate!
+    authenticate_or_request_with_http_token do |token, _options|
+      payload = Auth::TokenProvider.decode_token(token)
+      @current_user = User.find_by(email: payload['email'], fractal_id: payload['fractal_id'])
+    end
+  rescue StandardError => e
+    render json: { error: e.message }, status: :unauthorized
+  end
+
+  attr_reader :current_user
+
+  def user_not_authorized
+    render json: { error: 'No Authorization!' }, status: :unauthorized
+  end
+
+  def authorization_header(token)
+    response.headers['Authorization'] = "Bearer #{token}"
   end
 end
