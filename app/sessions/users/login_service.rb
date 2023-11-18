@@ -29,7 +29,7 @@ module Users
 
         user = User.create(name: @dg_user[:name], email: @dg_user[:email],
                            fractal_id: @dg_user[:fractal_id],
-                           token_dg: @token, avatar: @dg_user[:photo_url],
+                           token_dg: @token, photo_url: @dg_user[:photo_url],
                            unit_dg: unit.unit_dg)
 
         Auth::TokenProvider.issue_token({ email: user.email, fractal_id: user.fractal_id })
