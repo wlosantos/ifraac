@@ -129,6 +129,7 @@ GEM
     json-schema (3.0.0)
       addressable (>= 2.8)
     jsonapi-renderer (0.2.2)
+    jwt (2.7.1)
     language_server-protocol (3.17.0.3)
     loofah (2.22.0)
       crass (~> 1.0.2)
@@ -296,6 +297,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   faraday
+  jwt
   pagy
   pg (~> 1.1)
   pry-byebug
