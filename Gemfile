@@ -16,7 +16,6 @@ gem 'dotenv-rails'
 gem 'faraday'
 gem 'pundit'
 gem 'rack-cors'
-gem 'ransack'
 gem 'rolify'
 
 gem 'pagy'
@@ -28,7 +27,6 @@ gem 'bootsnap', require: false
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
-  gem 'awesome_print'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
@@ -47,7 +45,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner'
   gem 'shoulda-matchers', '~> 4.5', '>= 4.5.1'
   # mock api web requests
   gem 'webmock'
