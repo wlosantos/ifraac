@@ -13,8 +13,5 @@ AllCops:
     - 'lib/validators/**/*'
     - 'lib/validators/**/*'
 
-Documentation:
-  Enabled: false
-
 Style/Documentation:
   Enabled: false
