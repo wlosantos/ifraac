@@ -19,6 +19,7 @@ RSpec.describe TalkChannel, type: :model do
     context 'associations' do
       it { is_expected.to belong_to(:created_by).class_name('User').with_foreign_key(:created_by_id) }
       it { is_expected.to belong_to(:unit).with_foreign_key(:unit_dg).with_primary_key(:unit_dg) }
+      it { is_expected.to have_many(:messages) }
     end
   end
 end
