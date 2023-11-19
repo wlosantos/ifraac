@@ -2,6 +2,7 @@ class TalkChannel < ApplicationRecord
   belongs_to :created_by, class_name: 'User', foreign_key: :created_by_id
   belongs_to :unit, foreign_key: :unit_dg, primary_key: :unit_dg
   has_many :user_talks, as: :conversation
+  has_many :messages
 
   enum kinds: { privates: 0, groups: 1, helpdesk: 2 }
 

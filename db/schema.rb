@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_18_231447) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_19_000522) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content", null: false
+    t.integer "moderation_status", default: 0
+    t.datetime "moderated_at"
+    t.datetime "refused_at"
+    t.bigint "moderator_id"
+    t.bigint "response_id"
+    t.bigint "talk_channel_id", null: false
+    t.string "talk_type", null: false
+    t.bigint "talk_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["moderator_id"], name: "index_messages_on_moderator_id"
+    t.index ["response_id"], name: "index_messages_on_response_id"
+    t.index ["talk_channel_id"], name: "index_messages_on_talk_channel_id"
+    t.index ["talk_type", "talk_id"], name: "index_messages_on_talk"
+  end
 
   create_table "talk_channels", force: :cascade do |t|
     t.string "name"
@@ -65,6 +83,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_18_231447) do
     t.index ["token_dg"], name: "index_users_on_token_dg", unique: true
   end
 
+  add_foreign_key "messages", "messages", column: "response_id"
+  add_foreign_key "messages", "talk_channels"
+  add_foreign_key "messages", "users", column: "moderator_id"
   add_foreign_key "talk_channels", "units", column: "unit_dg", primary_key: "unit_dg"
   add_foreign_key "talk_channels", "users", column: "created_by_id"
   add_foreign_key "user_talks", "users", column: "participant_id"

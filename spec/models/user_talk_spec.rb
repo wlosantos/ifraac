@@ -18,5 +18,6 @@ RSpec.describe UserTalk, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:participant).class_name('User').with_foreign_key(:participant_id) }
     it { is_expected.to belong_to(:conversation) }
+    it { is_expected.to have_many(:messages) }
   end
 end
