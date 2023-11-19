@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_18_211153) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_18_231447) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,6 +39,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_18_211153) do
     t.index ["unit_dg"], name: "index_units_on_unit_dg", unique: true
   end
 
+  create_table "user_talks", force: :cascade do |t|
+    t.integer "status", default: 0
+    t.bigint "participant_id", null: false
+    t.string "conversation_type", null: false
+    t.bigint "conversation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_type", "conversation_id"], name: "index_user_talks_on_conversation"
+    t.index ["participant_id"], name: "index_user_talks_on_participant_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -56,5 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_18_211153) do
 
   add_foreign_key "talk_channels", "units", column: "unit_dg", primary_key: "unit_dg"
   add_foreign_key "talk_channels", "users", column: "created_by_id"
+  add_foreign_key "user_talks", "users", column: "participant_id"
   add_foreign_key "users", "units", column: "unit_dg", primary_key: "unit_dg"
 end
