@@ -13,6 +13,7 @@ RSpec.describe User, type: :model do
   describe 'associations' do
     it { is_expected.to belong_to(:unit).with_foreign_key(:unit_dg).with_primary_key(:unit_dg) }
     it { is_expected.to have_many(:talk_channels).inverse_of(:created_by).with_foreign_key(:created_by_id) }
+    it { is_expected.to have_many(:user_talks).inverse_of(:participant).with_foreign_key(:participant_id) }
   end
 
   describe 'validations' do
