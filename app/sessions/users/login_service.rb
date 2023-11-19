@@ -39,8 +39,11 @@ module Users
     def user_unit(units)
       return unless units.present?
 
-      unit = units.first
-      Unit.find_or_create_by(unit_dg: unit[:id], name: unit[:name])
+      unit_first = units.first
+      unit = Unit.find_by(unit_dg: unit_first[:id])
+      return unit if unit.present?
+
+      Unit.create!(unit_dg: unit[:id], name: unit[:name])
     end
   end
 end
